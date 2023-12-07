@@ -2,9 +2,12 @@ package com.example.practice.project.controller;
 
 import static com.example.practice.project.utilities.ApiEndPointConstants.API;
 import static com.example.practice.project.utilities.ApiEndPointConstants.AUTH;
+import static com.example.practice.project.utilities.ApiEndPointConstants.CHANGE_PASSWORD;
 import static com.example.practice.project.utilities.ApiEndPointConstants.LOGIN;
 
+import com.example.practice.project.dto.ResponseDto;
 import com.example.practice.project.jwt.JwtUtils;
+import com.example.practice.project.model.request.ChangePasswordRequest;
 import com.example.practice.project.model.request.LoginRequest;
 import com.example.practice.project.model.response.JwtResponse;
 import com.example.practice.project.service.IAuthService;
@@ -57,6 +60,11 @@ public class AuthController {
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         return ResponseEntity.ok(new JwtResponse("Token Generated", jwt, true));
+    }
+
+    @PostMapping(CHANGE_PASSWORD)
+    public ResponseEntity<ResponseDto> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
+        return ResponseEntity.ok(authService.changePassword(changePasswordRequest));
     }
 
 }

@@ -1,13 +1,27 @@
 package com.example.practice.project.utilities;
 
 import com.example.practice.project.customexception.BusinessException;
+import com.example.practice.project.dto.UserDto;
+import com.example.practice.project.entity.User;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import org.modelmapper.ModelMapper;
 
 public class ModelConverter {
 
+
     private ModelConverter() {
+    }
+
+    private static final ModelMapper modelMapper = new ModelMapper();
+
+    public static UserDto convertToDto(User user) {
+        return modelMapper.map(user, UserDto.class);
+    }
+
+    public static User convertToEntity(UserDto userDto) {
+        return modelMapper.map(userDto, User.class);
     }
 
     /**

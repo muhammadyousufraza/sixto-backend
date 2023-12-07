@@ -12,12 +12,6 @@ jwt:
   secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength1234567890987654321234567890123456789876543234567876543
   expirationms: 86400000
 
-resilience4j:
-  timelimiter:
-    configs:
-      default:
-        timeout-duration: 60s
-
 encryption:
   aes:
     secret-key: my_super_secret_key
