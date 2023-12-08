@@ -1,5 +1,6 @@
 package com.example.practice.project.entity;
 
+import jakarta.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 //import javax.persistence.MappedSuperclass;
@@ -8,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-//@MappedSuperclass
+@MappedSuperclass
 public class BaseEntity implements Serializable {
 
     private boolean isDeleted;
