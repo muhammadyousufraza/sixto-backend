@@ -1,8 +1,8 @@
 package com.example.practice.project.service.impl;
 
 
-import static com.example.practice.project.utilities.ApiEndPointConstants.INVALID_PASSWORD;
-import static com.example.practice.project.utilities.ApiEndPointConstants.NEW_AND_OLD_PASSWORD_SAME_ERROR;
+import static com.example.practice.project.utilities.Constants.INVALID_PASSWORD;
+import static com.example.practice.project.utilities.Constants.NEW_AND_OLD_PASSWORD_SAME_ERROR;
 
 import com.example.practice.project.customexception.BusinessException;
 import com.example.practice.project.dto.ResponseDto;

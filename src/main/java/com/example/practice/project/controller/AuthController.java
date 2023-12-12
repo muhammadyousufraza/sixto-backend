@@ -1,9 +1,9 @@
 package com.example.practice.project.controller;
 
-import static com.example.practice.project.utilities.ApiEndPointConstants.API;
-import static com.example.practice.project.utilities.ApiEndPointConstants.AUTH;
-import static com.example.practice.project.utilities.ApiEndPointConstants.CHANGE_PASSWORD;
-import static com.example.practice.project.utilities.ApiEndPointConstants.LOGIN;
+import static com.example.practice.project.utilities.Constants.API;
+import static com.example.practice.project.utilities.Constants.AUTH;
+import static com.example.practice.project.utilities.Constants.CHANGE_PASSWORD;
+import static com.example.practice.project.utilities.Constants.LOGIN;
 
 import com.example.practice.project.dto.ResponseDto;
 import com.example.practice.project.jwt.JwtUtils;
