@@ -1,0 +1,24 @@
+server:
+  port: 8120
+
+spring:
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/practiceproject?createDatabaseIfNotExist=true
+    password: 1234567
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+    open-in-view: true
+
+  sql:
+    init:
+      mode: always

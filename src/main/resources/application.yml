@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: dev
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+# App Properties
+# 24 hours
+jwt:
+  secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength1234567890987654321234567890123456789876543234567876543
+  expirationms: 86400000
+
+encryption:
+  aes:
+    secret-key: my_super_secret_key
+    salt: ssshhhhhhhhhhh!!!!
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: INFO
+
