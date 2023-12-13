@@ -1,27 +1,26 @@
 # Use the official AdoptOpenJDK 17 image as the base image
-FROM adoptopenjdk:17-jdk-hotspot
-  
+FROM gradle:7-jdk17
+
   # Set the working directory inside the container
 WORKDIR /app
-  
+
   # Copy the Gradle build files and settings
 COPY build.gradle .
 COPY settings.gradle .
-  
+
   # Copy only the necessary files to utilize Docker cache
 COPY gradle/wrapper/ gradle/wrapper/
-  
+
   # Download and install the required dependencies
-RUN ./gradlew --version
-  
+
   # Copy the application source code
 COPY src/ src/
-  
+
   # Build the application
-RUN ./gradlew build
-  
+RUN gradle build
+RUN ls -R
   # Copy the JAR artifact to the container
-COPY build/libs/*.jar app.jar
-  
+RUN cp ./build/libs/practice-project-0.0.1-SNAPSHOT.jar ./app.jar
+
   # Set the default command to run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
