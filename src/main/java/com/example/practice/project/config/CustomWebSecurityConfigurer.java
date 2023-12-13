@@ -70,7 +70,7 @@ public class CustomWebSecurityConfigurer {
             .authorizeHttpRequests(request -> {
                 request.requestMatchers(HttpMethod.POST, API + AUTH + LOGIN).permitAll();
                 request.requestMatchers("/users").hasAnyAuthority("USER", "ADMIN");
-                request.requestMatchers(HttpMethod.GET, "/get").permitAll();
+                request.requestMatchers(HttpMethod.GET, "/version").permitAll();
                 request.requestMatchers(HttpMethod.GET, API + USER + "/**").permitAll();
                 request.requestMatchers(HttpMethod.POST, API + USER + "/**").permitAll();
             }).formLogin(Customizer.withDefaults()).build();
