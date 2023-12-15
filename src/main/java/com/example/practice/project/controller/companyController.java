@@ -6,7 +6,7 @@ import static com.example.practice.project.utilities.Constants.Company;
 import com.example.practice.project.dto.CompanyDto;
 import com.example.practice.project.model.request.CompanyAddRequest;
 import com.example.practice.project.model.request.CompanyUpdateRequest;
-import com.example.practice.project.service.IComapnyService;
+import com.example.practice.project.service.ICompanyService;
 import com.example.practice.project.utilities.ModelConverter;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -31,20 +31,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class companyController {
 
     @Autowired
-    IComapnyService iComapnyService;
+    ICompanyService iCompanyService;
 
 
     @PostMapping()
     public ResponseEntity<CompanyDto> save(@Valid @RequestBody CompanyAddRequest companyAddRequest) {
         log.info(" Company save  Request: {}", companyAddRequest.getCompanyFirstName());
-        CompanyDto companyDto = iComapnyService.add(ModelConverter.convertToDto(companyAddRequest), true);
+        CompanyDto companyDto = iCompanyService.add(ModelConverter.convertToDto(companyAddRequest), true);
         return ResponseEntity.status(HttpStatus.CREATED).body(companyDto);
     }
 
     @PutMapping()
     public ResponseEntity<CompanyDto> update(@RequestBody CompanyUpdateRequest companyUpdateRequest) {
         log.info("Update Company By Id Request: {}", companyUpdateRequest.getId());
-        CompanyDto companyDto = iComapnyService.update(ModelConverter.convertToDto(companyUpdateRequest));
+        CompanyDto companyDto = iCompanyService.update(ModelConverter.convertToDto(companyUpdateRequest));
         return ResponseEntity.ok(companyDto);
     }
 
@@ -52,7 +52,7 @@ public class companyController {
     @GetMapping()
     public ResponseEntity<List<CompanyDto>> getCompanies() {
         log.debug("Get All Companies");
-        List<CompanyDto> allCompanies = iComapnyService.getAllCompanies();
+        List<CompanyDto> allCompanies = iCompanyService.getAllCompanies();
         if (allCompanies.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(allCompanies);
         }
@@ -62,14 +62,14 @@ public class companyController {
     @GetMapping("/{id}")
     public ResponseEntity<CompanyDto> get(@PathVariable Long id) {
         log.debug("Get Company By Id Request: {}", id);
-        CompanyDto companyDto = iComapnyService.getById(id);
+        CompanyDto companyDto = iCompanyService.getById(id);
         return ResponseEntity.ok(companyDto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         log.info("delete company By Id Request: {}", id);
-        iComapnyService.deleteById(id);
+        iCompanyService.deleteById(id);
         log.info("Deleted Successfully : {}", id);
         return ResponseEntity.ok("Deleted Successfully");
     }

@@ -3,7 +3,7 @@ package com.example.practice.project.service;
 import com.example.practice.project.dto.CompanyDto;
 import java.util.List;
 
-public interface IComapnyService {
+public interface ICompanyService {
 
     List<CompanyDto> getAllCompanies();
 

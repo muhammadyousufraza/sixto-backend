@@ -6,7 +6,7 @@ import com.example.practice.project.customexception.NotFoundException;
 import com.example.practice.project.dto.CompanyDto;
 import com.example.practice.project.entity.Company;
 import com.example.practice.project.repository.CompanyRepository;
-import com.example.practice.project.service.IComapnyService;
+import com.example.practice.project.service.ICompanyService;
 import com.example.practice.project.utilities.ModelConverter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class ComapnyService implements IComapnyService {
+public class CompanyService implements ICompanyService {
 
     @Autowired
     private CompanyRepository companyRepository;
@@ -51,7 +51,6 @@ public class ComapnyService implements IComapnyService {
     @Override
     public CompanyDto add(CompanyDto companyDto, boolean isSendNotification) {
         log.info("Adding a new company..");
-
         Company company = ModelConverter.convertToEntity(companyDto);
         company.setCreatedDate(LocalDateTime.now());
         company.setUpdatedDate(LocalDateTime.now());
@@ -74,10 +73,7 @@ public class ComapnyService implements IComapnyService {
 
 
         Company savedComapny = ModelConverter.convertToEntity(companyDto);
-
-        //Set the fields here
-
-        savedComapny.setCreatedDate(LocalDateTime.now());
+        savedComapny.setCreatedDate(companyOptional.get().getCreatedDate());
         savedComapny.setUpdatedDate(LocalDateTime.now());
 
         savedComapny = companyRepository.save(savedComapny);
