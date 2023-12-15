@@ -1,10 +1,14 @@
 package com.example.practice.project.utilities;
 
 import com.example.practice.project.customexception.BusinessException;
+import com.example.practice.project.dto.CompanyDto;
 import com.example.practice.project.dto.PackageDto;
 import com.example.practice.project.dto.UserDto;
+import com.example.practice.project.entity.Company;
 import com.example.practice.project.entity.Package;
 import com.example.practice.project.entity.User;
+import com.example.practice.project.model.request.CompanyAddRequest;
+import com.example.practice.project.model.request.CompanyUpdateRequest;
 import com.example.practice.project.model.request.PackageAddRequest;
 import com.example.practice.project.model.request.PackageUpdateRequest;
 import com.example.practice.project.model.request.UserAddRequest;
@@ -32,8 +36,16 @@ public class ModelConverter {
         return modelMapper.map(packages, PackageDto.class);
     }
 
+    public static CompanyDto convertToDto(Company company) {
+        return modelMapper.map(company, CompanyDto.class);
+    }
+
     public static UserDto convertToDto(UserAddRequest userAddRequest) {
         return modelMapper.map(userAddRequest, UserDto.class);
+    }
+
+    public static CompanyDto convertToDto(CompanyAddRequest companyAddRequest) {
+        return modelMapper.map(companyAddRequest, CompanyDto.class);
     }
 
     public static PackageDto convertToDto(PackageAddRequest packages) {
@@ -46,6 +58,11 @@ public class ModelConverter {
     public static PackageDto convertToDto(PackageUpdateRequest packages) {
         return modelMapper.map(packages, PackageDto.class);
     }
+
+    public static CompanyDto convertToDto(CompanyUpdateRequest companyUpdateRequest) {
+        return modelMapper.map(companyUpdateRequest, CompanyDto.class);
+    }
+
     public static List<UserDto> convertToUserDtosList(List<User> users) {
         return Arrays.asList(modelMapper.map(users, UserDto[].class));
     }
@@ -54,8 +71,16 @@ public class ModelConverter {
         return Arrays.asList(modelMapper.map(packages, PackageDto[].class));
     }
 
+    public static List<CompanyDto> convertToCompanyDtosList(List<Company> companies) {
+        return Arrays.asList(modelMapper.map(companies, CompanyDto[].class));
+    }
+
     public static User convertToEntity(UserDto userDto) {
         return modelMapper.map(userDto, User.class);
+    }
+
+    public static Company convertToEntity(CompanyDto companyDto) {
+        return modelMapper.map(companyDto, Company.class);
     }
 
     public static Package convertToEntity(PackageDto packageDto) {
