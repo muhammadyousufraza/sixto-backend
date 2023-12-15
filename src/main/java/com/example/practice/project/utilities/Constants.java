@@ -10,11 +10,14 @@ public class Constants {
     public static final String API = "/api";
     public static final String AUTH = "/auth";
     public static final String APACKAGE = "/package";
+    public static final String COMPANY = "/company";
     public static final String USER = "/user";
     public static final String LOGIN = "/login";
     public static final String CHANGE_PASSWORD = "/change-password";
     public static final String USER_NOT_FOUND = "User not found";
     public static final String PACKAGE_NOT_FOUND = "package not found";
+
+    public static final String COMPANY_NOT_FOUND = "company not found";
 
     public static final String EMAIL_FORMAT_REGEXP = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     public static final String EMAIL_FORMAT_INCORRECT = "Email Format Incorrect";

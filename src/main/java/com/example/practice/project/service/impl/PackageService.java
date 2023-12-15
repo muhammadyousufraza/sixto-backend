@@ -2,7 +2,6 @@ package com.example.practice.project.service.impl;
 
 import static com.example.practice.project.utilities.Constants.PACKAGE_NOT_FOUND;
 
-import com.example.practice.project.customexception.BusinessException;
 import com.example.practice.project.customexception.NotFoundException;
 import com.example.practice.project.dto.PackageDto;
 import com.example.practice.project.entity.Package;
@@ -75,13 +74,13 @@ public class PackageService implements IPackageService {
 
 
         Package savedPackage = ModelConverter.convertToEntity(packageDto);
-        savedPackage.setPackageTitle(packageDto.getPackageTitle());
-        savedPackage.setPackageFee(packageDto.getPackageFee());
-        savedPackage.setPackageDetail(packageDto.getPackageDetail());
-        savedPackage.setPackageTotalPrice(packageDto.getPackageTotalPrice());
-        savedPackage.setStateFee(packageDto.getStateFee());
+//        savedPackage.setPackageTitle(packageDto.getPackageTitle());
+//        savedPackage.setPackageFee(packageDto.getPackageFee());
+//        savedPackage.setPackageDetail(packageDto.getPackageDetail());
+//        savedPackage.setPackageTotalPrice(packageDto.getPackageTotalPrice());
+//        savedPackage.setStateFee(packageDto.getStateFee());
 
-        savedPackage.setCreatedDate(LocalDateTime.now());
+        savedPackage.setCreatedDate(optionalPackage.get().getCreatedDate());
         savedPackage.setUpdatedDate(LocalDateTime.now());
 
         savedPackage = packageRepository.save(savedPackage);
