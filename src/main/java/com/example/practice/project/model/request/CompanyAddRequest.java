@@ -1,5 +1,6 @@
 package com.example.practice.project.model.request;
 
+import com.example.practice.project.enums.CompanyType;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,9 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CompanyAddRequest implements Serializable {
 
-    private String companyFirstName;
-    private String companySecondName;
-    private String companyThirdName;
+    private String firstName;
+    private String secondName;
+    private String thirdName;
+    private String streetAddress;
+    private String detailAddress;
+    private String city;
+    private String state;
+    private String code;
     private Long packageId;
-    private Long userId;
+    private Long createdBy;
+    private CompanyType companyType;
 }

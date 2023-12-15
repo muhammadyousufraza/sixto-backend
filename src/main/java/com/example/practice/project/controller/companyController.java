@@ -36,7 +36,7 @@ public class companyController {
 
     @PostMapping()
     public ResponseEntity<CompanyDto> save(@Valid @RequestBody CompanyAddRequest companyAddRequest) {
-        log.info(" Company save  Request: {}", companyAddRequest.getCompanyFirstName());
+        log.info(" Company save  Request: {}", companyAddRequest.getFirstName());
         CompanyDto companyDto = iCompanyService.add(ModelConverter.convertToDto(companyAddRequest), true);
         return ResponseEntity.status(HttpStatus.CREATED).body(companyDto);
     }
