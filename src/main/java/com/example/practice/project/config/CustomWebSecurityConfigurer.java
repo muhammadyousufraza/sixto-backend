@@ -1,5 +1,6 @@
 package com.example.practice.project.config;
 
+import static com.example.practice.project.utilities.Constants.APACKAGE;
 import static com.example.practice.project.utilities.Constants.API;
 import static com.example.practice.project.utilities.Constants.AUTH;
 import static com.example.practice.project.utilities.Constants.LOGIN;
@@ -40,29 +41,6 @@ public class CustomWebSecurityConfigurer {
         return new BCryptPasswordEncoder();
     }
 
-    /**
-     * filterChain.
-     *
-     * @param http              HttpSecurity
-     * @param authEntryPointJwt AuthEntryPointJwt
-     * @return http .
-     * @throws Exception Exception
-     */
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http, AuthEntryPointJwt authEntryPointJwt) throws Exception {
-//        http.cors().and().csrf().disable()
-//            .exceptionHandling().authenticationEntryPoint(authEntryPointJwt).and()
-//            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//            .authorizeHttpRequests().requestMatchers("/v2/api-docs", "/swagger-resources",
-//            "/configuration/security", "/webjars/**", "/swagger-resources/configuration/ui",
-//            "/swagger-resources/configuration/security", "/swagger-ui/**").permitAll().and()
-//            .authorizeRequests().requestMatchers(HttpMethod.POST, ApiEndPointConstants.API + ApiEndPointConstants.AUTH + ApiEndPointConstants.LOGIN).permitAll().and()
-//            .authorizeRequests().requestMatchers(HttpMethod.GET, ApiEndPointConstants.API + ApiEndPointConstants.AUTH + REFRESH_TOKEN).authenticated()
-//            .anyRequest().authenticated();
-//
-//        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-//        return http.build();
-//    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
@@ -73,24 +51,14 @@ public class CustomWebSecurityConfigurer {
                 request.requestMatchers(HttpMethod.GET, "/version").permitAll();
                 request.requestMatchers(HttpMethod.GET, API + USER + "/**").permitAll();
                 request.requestMatchers(HttpMethod.POST, API + USER + "/**").permitAll();
+                request.requestMatchers(HttpMethod.PUT, API + USER + "/**").permitAll();
+                request.requestMatchers(HttpMethod.DELETE, API + USER + "/**").permitAll();
+                request.requestMatchers(HttpMethod.GET, API + APACKAGE + "/**").permitAll();
+                request.requestMatchers(HttpMethod.POST, API + APACKAGE + "/**").permitAll();
+                request.requestMatchers(HttpMethod.PUT, API + APACKAGE + "/**").permitAll();
+                request.requestMatchers(HttpMethod.DELETE, API + APACKAGE + "/**").permitAll();
             }).formLogin(Customizer.withDefaults()).build();
 
     }
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//            .authorizeHttpRequests(requests -> requests
-//                .requestMatchers("/vertretungsplan").hasAnyRole("SCHUELER", "LEHRER", "VERWALTUNG")
-//                .anyRequest().authenticated()
-//            )
-//            .formLogin(form -> form
-//                .loginPage(ApiEndPointConstants.API + ApiEndPointConstants.AUTH + ApiEndPointConstants.LOGIN)
-//                .permitAll()
-//            )
-//            .logout(logout -> logout
-//                .permitAll());
-//
-//        return http.build();
-//    }
 }
