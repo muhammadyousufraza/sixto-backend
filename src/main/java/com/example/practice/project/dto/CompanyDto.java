@@ -1,5 +1,8 @@
 package com.example.practice.project.dto;
 
+import com.example.practice.project.enums.CompanyType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +21,5 @@ public class CompanyDto implements Serializable {
     private String companyThirdName;
     private Long packageId;
     private Long userId;
+    private CompanyType companyType;
 }

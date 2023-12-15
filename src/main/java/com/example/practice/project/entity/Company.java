@@ -1,7 +1,10 @@
 package com.example.practice.project.entity;
 
 
+import com.example.practice.project.enums.CompanyType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,6 +35,9 @@ public class Company extends BaseEntity {
     private String companyFirstName;
     private String companySecondName;
     private String companyThirdName;
+
+    @Enumerated(EnumType.STRING)
+    private CompanyType companyType;
 
     @OneToOne
     private Package aPackage;
