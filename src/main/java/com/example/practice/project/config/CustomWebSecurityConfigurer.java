@@ -3,6 +3,7 @@ package com.example.practice.project.config;
 import static com.example.practice.project.utilities.Constants.APACKAGE;
 import static com.example.practice.project.utilities.Constants.API;
 import static com.example.practice.project.utilities.Constants.AUTH;
+import static com.example.practice.project.utilities.Constants.COMPANY;
 import static com.example.practice.project.utilities.Constants.LOGIN;
 import static com.example.practice.project.utilities.Constants.USER;
 
@@ -57,6 +58,10 @@ public class CustomWebSecurityConfigurer {
                 request.requestMatchers(HttpMethod.POST, API + APACKAGE + "/**").permitAll();
                 request.requestMatchers(HttpMethod.PUT, API + APACKAGE + "/**").permitAll();
                 request.requestMatchers(HttpMethod.DELETE, API + APACKAGE + "/**").permitAll();
+                request.requestMatchers(HttpMethod.GET, API + COMPANY + "/**").permitAll();
+                request.requestMatchers(HttpMethod.POST, API + COMPANY + "/**").permitAll();
+                request.requestMatchers(HttpMethod.PUT, API + COMPANY + "/**").permitAll();
+                request.requestMatchers(HttpMethod.DELETE, API + COMPANY + "/**").permitAll();
             }).formLogin(Customizer.withDefaults()).build();
 
     }

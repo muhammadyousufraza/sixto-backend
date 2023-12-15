@@ -1,7 +1,7 @@
 package com.example.practice.project.controller;
 
 import static com.example.practice.project.utilities.Constants.API;
-import static com.example.practice.project.utilities.Constants.Company;
+import static com.example.practice.project.utilities.Constants.COMPANY;
 
 import com.example.practice.project.dto.CompanyDto;
 import com.example.practice.project.model.request.CompanyAddRequest;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @CrossOrigin(originPatterns = "*", maxAge = 3600)
-@RequestMapping(API + Company)
+@RequestMapping(API + COMPANY)
 public class companyController {
 
     @Autowired
