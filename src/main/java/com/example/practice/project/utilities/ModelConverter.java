@@ -3,14 +3,18 @@ package com.example.practice.project.utilities;
 import com.example.practice.project.customexception.BusinessException;
 import com.example.practice.project.dto.CompanyDto;
 import com.example.practice.project.dto.PackageDto;
+import com.example.practice.project.dto.ShareholderDto;
 import com.example.practice.project.dto.UserDto;
 import com.example.practice.project.entity.Company;
 import com.example.practice.project.entity.Package;
+import com.example.practice.project.entity.Shareholder;
 import com.example.practice.project.entity.User;
 import com.example.practice.project.model.request.CompanyAddRequest;
 import com.example.practice.project.model.request.CompanyUpdateRequest;
 import com.example.practice.project.model.request.PackageAddRequest;
 import com.example.practice.project.model.request.PackageUpdateRequest;
+import com.example.practice.project.model.request.ShareholderAddRequest;
+import com.example.practice.project.model.request.ShareholderUpdateRequest;
 import com.example.practice.project.model.request.UserAddRequest;
 import com.example.practice.project.model.request.UserUpdateRequest;
 import java.lang.reflect.Field;
@@ -32,6 +36,10 @@ public class ModelConverter {
         return modelMapper.map(user, UserDto.class);
     }
 
+    public static ShareholderDto convertToDto(Shareholder shareholder) {
+        return modelMapper.map(shareholder, ShareholderDto.class);
+    }
+
     public static PackageDto convertToDto(Package packages) {
         return modelMapper.map(packages, PackageDto.class);
     }
@@ -42,6 +50,10 @@ public class ModelConverter {
 
     public static UserDto convertToDto(UserAddRequest userAddRequest) {
         return modelMapper.map(userAddRequest, UserDto.class);
+    }
+
+    public static ShareholderDto convertToDto(ShareholderAddRequest shareholderAddRequest) {
+        return modelMapper.map(shareholderAddRequest, ShareholderDto.class);
     }
 
     public static CompanyDto convertToDto(CompanyAddRequest companyAddRequest) {
@@ -63,6 +75,10 @@ public class ModelConverter {
         return modelMapper.map(companyUpdateRequest, CompanyDto.class);
     }
 
+    public static ShareholderDto convertToDto(ShareholderUpdateRequest shareholderUpdateRequest) {
+        return modelMapper.map(shareholderUpdateRequest, ShareholderDto.class);
+    }
+
     public static List<UserDto> convertToUserDtosList(List<User> users) {
         return Arrays.asList(modelMapper.map(users, UserDto[].class));
     }
@@ -75,8 +91,16 @@ public class ModelConverter {
         return Arrays.asList(modelMapper.map(companies, CompanyDto[].class));
     }
 
+    public static List<ShareholderDto> convertToShareholderDtosList(List<Shareholder> shareholders) {
+        return Arrays.asList(modelMapper.map(shareholders, ShareholderDto[].class));
+    }
+
     public static User convertToEntity(UserDto userDto) {
         return modelMapper.map(userDto, User.class);
+    }
+
+    public static Shareholder convertToEntity(ShareholderDto shareholderDto) {
+        return modelMapper.map(shareholderDto, Shareholder.class);
     }
 
     public static Company convertToEntity(CompanyDto companyDto) {
