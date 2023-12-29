@@ -1,8 +1,7 @@
 package com.example.practice.project.model.request;
 
-
-import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -27,4 +27,13 @@ public class Constants {
     public static final String INVALID_PASSWORD = "invalid password";
     public static final String NEW_AND_OLD_PASSWORD_SAME_ERROR = "new and old password should not be same";
 
+    public static final String UNKNOWN_REQUEST = "Unknown Request";
+
+    public static final String SERVER_ERROR = "Server Error";
+    public static final String NOT_FOUND = "Not Found";
+    public static final String SOMETHING_WENT_WRONG = "Some thing went wrong. Please contact to Support team.";
+    public static final String MAX_UPLOAD_SIZE_EXCEEDED = "Maximum upload size exceeded";
+    public static final String UNAUTHORIZED = "UnAuthorized";
+
+
 }

@@ -8,8 +8,8 @@ import com.example.practice.project.model.request.CompanyAddRequest;
 import com.example.practice.project.model.request.CompanyUpdateRequest;
 import com.example.practice.project.service.ICompanyService;
 import com.example.practice.project.utilities.ModelConverter;
-import jakarta.validation.Valid;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,6 @@ public class companyController {
 
     @Autowired
     ICompanyService iCompanyService;
-
 
     @PostMapping()
     public ResponseEntity<CompanyDto> save(@Valid @RequestBody CompanyAddRequest companyAddRequest) {

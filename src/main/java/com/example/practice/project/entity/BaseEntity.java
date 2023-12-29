@@ -1,9 +1,8 @@
 package com.example.practice.project.entity;
 
-import jakarta.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-//import javax.persistence.MappedSuperclass;
+import javax.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 
