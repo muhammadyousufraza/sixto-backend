@@ -4,6 +4,7 @@ import static com.example.practice.project.utilities.Constants.API;
 import static com.example.practice.project.utilities.Constants.COMPANY;
 
 import com.example.practice.project.dto.CompanyDto;
+import com.example.practice.project.enums.CompanyStatus;
 import com.example.practice.project.model.request.CompanyAddRequest;
 import com.example.practice.project.model.request.CompanyUpdateRequest;
 import com.example.practice.project.service.ICompanyService;
@@ -12,6 +13,9 @@ import java.util.List;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -64,6 +68,18 @@ public class companyController {
         CompanyDto companyDto = iCompanyService.getById(id);
         return ResponseEntity.ok(companyDto);
     }
+
+    @GetMapping("/by-user/{id}/{statuses}")
+    public ResponseEntity<Page<CompanyDto>> getAllCompaniesByUserId(@PathVariable Long id, @PathVariable List<CompanyStatus> statuses,
+                                                                    @PageableDefault(size = 10) Pageable pageable) {
+        log.debug("Get All Companies By User Id Request: {}", id);
+        Page<CompanyDto> companyDto = iCompanyService.getAllCompaniesByUserId(id, statuses, pageable);
+        if (!companyDto.hasContent()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(companyDto);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(companyDto);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {

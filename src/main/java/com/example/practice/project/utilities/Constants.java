@@ -11,9 +11,12 @@ public class Constants {
     public static final String AUTH = "/auth";
     public static final String APACKAGE = "/package";
     public static final String COMPANY = "/company";
+    public static final String FILE = "/file";
     public static final String SHAREHOLDER = "/shareholder";
     public static final String USER = "/user";
     public static final String LOGIN = "/login";
+    public static final String UPLOAD_FILES = "/upload-files";
+    public static final String UPLOAD_MULTI_FILES = "/upload-multi-files";
     public static final String CHANGE_PASSWORD = "/change-password";
     public static final String USER_NOT_FOUND = "User not found";
     public static final String PACKAGE_NOT_FOUND = "package not found";
@@ -21,7 +24,7 @@ public class Constants {
     public static final String COMPANY_NOT_FOUND = "company not found";
 
     public static final String SHAREHOLDER_NOT_FOUND = "shareholder not found";
-
+    public static final String FILE_NOT_FOUND = "file not found";
     public static final String EMAIL_FORMAT_REGEXP = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     public static final String EMAIL_FORMAT_INCORRECT = "Email Format Incorrect";
     public static final String INVALID_PASSWORD = "invalid password";

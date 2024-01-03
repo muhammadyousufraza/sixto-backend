@@ -2,10 +2,12 @@ package com.example.practice.project.utilities;
 
 import com.example.practice.project.customexception.BusinessException;
 import com.example.practice.project.dto.CompanyDto;
+import com.example.practice.project.dto.FileDto;
 import com.example.practice.project.dto.PackageDto;
 import com.example.practice.project.dto.ShareholderDto;
 import com.example.practice.project.dto.UserDto;
 import com.example.practice.project.entity.Company;
+import com.example.practice.project.entity.File;
 import com.example.practice.project.entity.Package;
 import com.example.practice.project.entity.Shareholder;
 import com.example.practice.project.entity.User;
@@ -23,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 
 public class ModelConverter {
 
@@ -63,6 +66,7 @@ public class ModelConverter {
     public static PackageDto convertToDto(PackageAddRequest packages) {
         return modelMapper.map(packages, PackageDto.class);
     }
+
     public static UserDto convertToDto(UserUpdateRequest userUpdateRequest) {
         return modelMapper.map(userUpdateRequest, UserDto.class);
     }
@@ -77,6 +81,10 @@ public class ModelConverter {
 
     public static ShareholderDto convertToDto(ShareholderUpdateRequest shareholderUpdateRequest) {
         return modelMapper.map(shareholderUpdateRequest, ShareholderDto.class);
+    }
+
+    public static FileDto convertToDto(File file) {
+        return modelMapper.map(file, FileDto.class);
     }
 
     public static List<UserDto> convertToUserDtosList(List<User> users) {
@@ -95,6 +103,14 @@ public class ModelConverter {
         return Arrays.asList(modelMapper.map(shareholders, ShareholderDto[].class));
     }
 
+    public static List<FileDto> convertToFileDtosList(List<File> files) {
+        return Arrays.asList(modelMapper.map(files, FileDto[].class));
+    }
+
+    public static Page<CompanyDto> convertToCompanyBookingPageDto(Page<Company> companies) {
+        return companies.map(x -> modelMapper.map(x, CompanyDto.class));
+    }
+
     public static User convertToEntity(UserDto userDto) {
         return modelMapper.map(userDto, User.class);
     }
@@ -109,6 +125,10 @@ public class ModelConverter {
 
     public static Package convertToEntity(PackageDto packageDto) {
         return modelMapper.map(packageDto, Package.class);
+    }
+
+    public static File convertToEntity(FileDto fileDto) {
+        return modelMapper.map(fileDto, File.class);
     }
 
     /**
