@@ -2,15 +2,14 @@ package com.example.practice.project.controller;
 
 import static com.example.practice.project.utilities.Constants.APACKAGE;
 import static com.example.practice.project.utilities.Constants.API;
-import static com.example.practice.project.utilities.Constants.AUTH;
 
 import com.example.practice.project.dto.PackageDto;
 import com.example.practice.project.model.request.PackageAddRequest;
 import com.example.practice.project.model.request.PackageUpdateRequest;
 import com.example.practice.project.service.IPackageService;
 import com.example.practice.project.utilities.ModelConverter;
-import jakarta.validation.Valid;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +32,6 @@ public class packageController {
 
     @Autowired
     IPackageService iPackageService;
-
 
     @PostMapping()
     public ResponseEntity<PackageDto> save(@Valid @RequestBody PackageAddRequest packageAddRequest) {

@@ -1,12 +1,6 @@
 package com.example.practice.project.dto;
 
-import com.example.practice.project.entity.Package;
-import com.example.practice.project.entity.User;
 import com.example.practice.project.enums.CompanyType;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

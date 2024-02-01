@@ -3,14 +3,13 @@ package com.example.practice.project.model.request;
 import static com.example.practice.project.utilities.Constants.EMAIL_FORMAT_INCORRECT;
 import static com.example.practice.project.utilities.Constants.EMAIL_FORMAT_REGEXP;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @Builder

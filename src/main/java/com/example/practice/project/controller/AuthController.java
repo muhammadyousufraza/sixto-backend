@@ -11,7 +11,7 @@ import com.example.practice.project.model.request.ChangePasswordRequest;
 import com.example.practice.project.model.request.LoginRequest;
 import com.example.practice.project.model.response.JwtResponse;
 import com.example.practice.project.service.IAuthService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AccountStatusException;

@@ -1,10 +1,5 @@
 package com.example.practice.project.model.request;
 
-import static com.example.practice.project.utilities.Constants.EMAIL_FORMAT_INCORRECT;
-import static com.example.practice.project.utilities.Constants.EMAIL_FORMAT_REGEXP;
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
