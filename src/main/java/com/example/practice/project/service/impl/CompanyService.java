@@ -4,8 +4,10 @@ import static com.example.practice.project.utilities.Constants.COMPANY_NOT_FOUND
 
 import com.example.practice.project.customexception.NotFoundException;
 import com.example.practice.project.dto.CompanyDto;
+import com.example.practice.project.dto.CompanyFileDto;
 import com.example.practice.project.entity.Company;
 import com.example.practice.project.enums.CompanyStatus;
+import com.example.practice.project.repository.CompanyFileRepository;
 import com.example.practice.project.repository.CompanyRepository;
 import com.example.practice.project.service.ICompanyService;
 import com.example.practice.project.utilities.ModelConverter;
@@ -27,6 +29,9 @@ public class CompanyService implements ICompanyService {
 
     @Autowired
     private CompanyRepository companyRepository;
+
+    @Autowired
+    private CompanyFileRepository companyFileRepository;
 
     @Override
     public List<CompanyDto> getAllCompanies() {
@@ -110,5 +115,16 @@ public class CompanyService implements ICompanyService {
         return true;
     }
 
+    @Override
+    public CompanyFileDto saveCompanyFiles(CompanyFileDto companyFile) {
+        log.info("Saving company file: {}", companyFile);
+        return ModelConverter.convertToDto(companyFileRepository.save(ModelConverter.convertToEntity(companyFile)));
+    }
+
+    @Override
+    public List<CompanyFileDto> getCompanyFiles(Long companyId) {
+        log.info("Get all company files of company: {}", companyId);
+        return ModelConverter.convertToCompanyFileDtosList(companyFileRepository.findByCompanyId(companyId));
+    }
 
 }

@@ -35,6 +35,9 @@ public class Shareholder extends BaseEntity {
     private String maritalStatus;
     private String homeAddress;
     private Double sharePercentage;
+    private boolean isShareHolder;
+    private boolean isLegalRepresentative;
+    private boolean isManager;
 
     @OneToOne
     private Company company;

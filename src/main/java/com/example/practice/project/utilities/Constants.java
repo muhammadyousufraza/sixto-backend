@@ -14,6 +14,7 @@ public class Constants {
     public static final String FILE = "/file";
     public static final String SHAREHOLDER = "/shareholder";
     public static final String USER = "/user";
+    public static final String LOOKUP = "/lookup";
     public static final String LOGIN = "/login";
     public static final String UPLOAD_FILES = "/upload-files";
     public static final String UPLOAD_MULTI_FILES = "/upload-multi-files";

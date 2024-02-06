@@ -1,7 +1,6 @@
 package com.example.practice.project.entity;
 
 import com.example.practice.project.enums.CompanyStatus;
-import com.example.practice.project.enums.CompanyType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -35,16 +34,13 @@ public class Company extends BaseEntity {
     private String firstName;
     private String secondName;
     private String thirdName;
-
-    @Enumerated(EnumType.STRING)
-    private CompanyType companyType;
+    private String companyType;
 
     private String streetAddress;
     private String detailAddress;
     private String city;
     private String state;
     private String code;
-
 
     @Enumerated(EnumType.STRING)
     private CompanyStatus companyStatus;

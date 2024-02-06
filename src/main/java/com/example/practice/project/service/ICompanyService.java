@@ -1,6 +1,8 @@
 package com.example.practice.project.service;
 
 import com.example.practice.project.dto.CompanyDto;
+import com.example.practice.project.dto.CompanyFileDto;
+import com.example.practice.project.entity.CompanyFiles;
 import com.example.practice.project.enums.CompanyStatus;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -21,4 +23,7 @@ public interface ICompanyService {
 
     Boolean deleteById(Long id);
 
+    CompanyFileDto saveCompanyFiles(CompanyFileDto companyFileDto);
+
+    List<CompanyFileDto> getCompanyFiles(Long companyId);
 }

@@ -24,5 +24,3 @@ logging:
         web:
           servlet:
             DispatcherServlet: DEBUG
-    org.springframework.cloud.sleuth: INFO
-

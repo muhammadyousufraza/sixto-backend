@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PackageUpdateRequest implements Serializable {
 
-
     private Long id;
     private String packageTitle;
     private Double packageTotalPrice;

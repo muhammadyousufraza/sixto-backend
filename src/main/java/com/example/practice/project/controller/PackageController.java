@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(originPatterns = "*", maxAge = 3600)
 @RequestMapping(API + APACKAGE)
-public class packageController {
+public class PackageController {
 
     @Autowired
     IPackageService iPackageService;
@@ -52,6 +52,16 @@ public class packageController {
     public ResponseEntity<List<PackageDto>> getPackages() {
         log.debug("Get All Packages");
         List<PackageDto> allPackages = iPackageService.getAllPackages();
+        if (allPackages.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(allPackages);
+        }
+        return ResponseEntity.ok(allPackages);
+    }
+
+    @GetMapping("/by-company-type/{companyTypeId}")
+    public ResponseEntity<List<PackageDto>> getPackagesByCountryType(@PathVariable Long companyTypeId) {
+        log.debug("Get All Packages By CountryType");
+        List<PackageDto> allPackages = iPackageService.getAllPackagesByCompanyType(companyTypeId);
         if (allPackages.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(allPackages);
         }

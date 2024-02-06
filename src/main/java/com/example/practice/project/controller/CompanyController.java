@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(originPatterns = "*", maxAge = 3600)
 @RequestMapping(API + COMPANY)
-public class companyController {
+public class CompanyController {
 
     @Autowired
     ICompanyService iCompanyService;

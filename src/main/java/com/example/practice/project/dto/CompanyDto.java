@@ -1,7 +1,6 @@
 package com.example.practice.project.dto;
 
 import com.example.practice.project.enums.CompanyStatus;
-import com.example.practice.project.enums.CompanyType;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +24,7 @@ public class CompanyDto implements Serializable {
     private String code;
     private Long packageId;
     private Long createdBy;
-    private CompanyType companyType;
+    private String companyType;
     private CompanyStatus companyStatus;
 
 }

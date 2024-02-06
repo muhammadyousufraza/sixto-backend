@@ -19,4 +19,5 @@ public class PackageDto implements Serializable {
     private Double packageFee;
     private Double stateFee;
     private String packageDetail;
+    private CompanyTypeDto companyType;
 }
