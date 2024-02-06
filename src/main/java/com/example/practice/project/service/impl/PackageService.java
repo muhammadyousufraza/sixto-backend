@@ -32,7 +32,7 @@ public class PackageService implements IPackageService {
             log.error("package not found : {}", packages);
             return new ArrayList<>();
         }
-        return ModelConverter.convertToPacakgeDtosList(packages);
+        return ModelConverter.convertToPackageDtosList(packages);
     }
 
     @Override
@@ -51,7 +51,6 @@ public class PackageService implements IPackageService {
     @Override
     public PackageDto add(PackageDto packageDto, boolean isSendNotification) {
         log.info("Adding a new Package..");
-
         Package aPackage = ModelConverter.convertToEntity(packageDto);
         aPackage.setCreatedDate(LocalDateTime.now());
         aPackage.setUpdatedDate(LocalDateTime.now());
@@ -101,5 +100,9 @@ public class PackageService implements IPackageService {
         return true;
     }
 
+    @Override
+    public List<PackageDto> getAllPackagesByCompanyType(Long companyTypeId) {
+        return ModelConverter.convertToPackageDtosList(packageRepository.findByCompanyTypeId(companyTypeId));
+    }
 
 }

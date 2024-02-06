@@ -4,7 +4,9 @@ import static com.example.practice.project.utilities.Constants.APACKAGE;
 import static com.example.practice.project.utilities.Constants.API;
 import static com.example.practice.project.utilities.Constants.AUTH;
 import static com.example.practice.project.utilities.Constants.COMPANY;
+import static com.example.practice.project.utilities.Constants.FILE;
 import static com.example.practice.project.utilities.Constants.LOGIN;
+import static com.example.practice.project.utilities.Constants.LOOKUP;
 import static com.example.practice.project.utilities.Constants.USER;
 
 import com.example.practice.project.jwt.AuthEntryPointJwt;
@@ -66,6 +68,10 @@ public class CustomWebSecurityConfigurer {
             .antMatchers(HttpMethod.POST, API + COMPANY + "/**").permitAll()
             .antMatchers(HttpMethod.PUT, API + COMPANY + "/**").permitAll()
             .antMatchers(HttpMethod.DELETE, API + COMPANY + "/**").permitAll()
+            .antMatchers(HttpMethod.GET, API + LOOKUP + "/**").permitAll()
+            .antMatchers(HttpMethod.DELETE, API + COMPANY + "/**").permitAll()
+            .antMatchers(HttpMethod.POST, API + FILE + "/**").permitAll()
+            .antMatchers(HttpMethod.GET, API + FILE + "/**").permitAll()
             .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

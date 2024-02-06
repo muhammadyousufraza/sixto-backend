@@ -16,4 +16,5 @@ public interface IPackageService {
 
     Boolean deleteById(Long id);
 
+    List<PackageDto> getAllPackagesByCompanyType(Long companyTypeId);
 }

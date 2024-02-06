@@ -1,6 +1,5 @@
 package com.example.practice.project.model.request;
 
-import com.example.practice.project.enums.CompanyType;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,5 +23,5 @@ public class CompanyAddRequest implements Serializable {
     private String code;
     private Long packageId;
     private Long createdBy;
-    private CompanyType companyType;
+    private String companyType;
 }

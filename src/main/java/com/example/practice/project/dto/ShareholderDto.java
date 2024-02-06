@@ -21,5 +21,8 @@ public class ShareholderDto implements Serializable {
     private String maritalStatus;
     private String homeAddress;
     private Double sharePercentage;
+    private boolean isShareHolder;
+    private boolean isLegalRepresentative;
+    private boolean isManager;
     private Long companyId;
 }

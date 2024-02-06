@@ -4,10 +4,19 @@ import static com.example.practice.project.utilities.Constants.USER_NOT_FOUND;
 
 import com.example.practice.project.customexception.BusinessException;
 import com.example.practice.project.customexception.NotFoundException;
+import com.example.practice.project.dto.CompanyDto;
+import com.example.practice.project.dto.ShareholderDto;
 import com.example.practice.project.dto.UserDto;
 import com.example.practice.project.entity.User;
+import com.example.practice.project.model.request.NotificationRequest;
+import com.example.practice.project.model.request.ShareholderAddRequest;
+import com.example.practice.project.model.request.UserCompanyShareholderRequest;
 import com.example.practice.project.repository.UserRepository;
+import com.example.practice.project.service.ICompanyService;
+import com.example.practice.project.service.IPackageService;
+import com.example.practice.project.service.IShareholderService;
 import com.example.practice.project.service.IUserService;
+import com.example.practice.project.service.WebSocketService;
 import com.example.practice.project.utilities.ModelConverter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -30,6 +39,18 @@ public class UserService implements IUserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private ICompanyService companyService;
+
+    @Autowired
+    private IPackageService packageService;
+
+    @Autowired
+    private IShareholderService shareholderService;
+
+    @Autowired
+    private WebSocketService webSocketService;
+
     @Override
     public List<UserDto> getAllUsers() {
         log.info("Getting all users...");
@@ -38,6 +59,7 @@ public class UserService implements IUserService {
             log.error("User not found : {}", users);
             return new ArrayList<>();
         }
+        users.stream().forEach(c -> c.setPassword(null));
         return ModelConverter.convertToUserDtosList(users);
     }
 
@@ -48,6 +70,7 @@ public class UserService implements IUserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             UserDto userDto = ModelConverter.convertToDto(user);
+            userDto.setPassword(null);
             return userDto;
         }
         log.error("User not found with parameter: {}", username);
@@ -60,6 +83,7 @@ public class UserService implements IUserService {
         log.info("Getting user by id: {}", id);
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
+            userOptional.get().setPassword(null);
             return ModelConverter.convertToDto(userOptional.get());
         } else {
             log.error(USER_NOT_FOUND + " with parameter : {}", id);
@@ -86,6 +110,24 @@ public class UserService implements IUserService {
         userDto = ModelConverter.convertToDto(user);
         userDto.setPassword(null);
         return userDto;
+    }
+
+    @Override
+    public UserCompanyShareholderRequest add(UserCompanyShareholderRequest userCompanyShareholderRequest) {
+        UserDto userDto = add(ModelConverter.convertToDto(userCompanyShareholderRequest.getUser()), false);
+        log.info("User added successfully. User ID: {}", userDto.getId());
+        userCompanyShareholderRequest.getCompany().setCreatedBy(userDto.getId());
+        CompanyDto companyDto = ModelConverter.convertToDto(userCompanyShareholderRequest.getCompany());
+        companyDto.setCompanyType(packageService.getById(companyDto.getPackageId()).getCompanyType().getName());
+        companyDto = companyService.add(companyDto, false);
+        log.info("Company saved successfully. Company ID: {}", companyDto.getId());
+        for (ShareholderAddRequest shareholder : userCompanyShareholderRequest.getShareholder()) {
+            shareholder.setCompanyId(companyDto.getId());
+            ShareholderDto shareholderDto = shareholderService.add(ModelConverter.convertToDto(shareholder), false);
+            log.info("ShareHolder  saved successfully. ShareHolder ID: {}", shareholderDto.getId());
+        }
+        userDto.setPassword(null);
+        return UserCompanyShareholderRequest.builder().user(ModelConverter.convertToRequest(userDto)).build();
     }
 
     @Override
@@ -166,5 +208,15 @@ public class UserService implements IUserService {
             isEmailDuplicateExists = true;
         }
         return isEmailDuplicateExists;
+    }
+
+    public boolean sendPushNotificationToUser(NotificationRequest notificationRequest) {
+        try {
+            webSocketService.notifyUser(notificationRequest.getEmail(), notificationRequest.getMessage());
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return false;
+        }
     }
 }

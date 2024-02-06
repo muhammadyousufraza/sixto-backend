@@ -3,9 +3,12 @@ package com.example.practice.project.entity;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,4 +37,9 @@ public class Package extends BaseEntity {
     @Column(columnDefinition = "json")
     @JsonRawValue
     private String packageDetail;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_type_id", referencedColumnName = "id", nullable = false)
+    private CompanyType companyType;
+
 }

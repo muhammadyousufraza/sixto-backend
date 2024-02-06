@@ -4,7 +4,9 @@ import static com.example.practice.project.utilities.Constants.API;
 import static com.example.practice.project.utilities.Constants.USER;
 
 import com.example.practice.project.dto.UserDto;
+import com.example.practice.project.model.request.NotificationRequest;
 import com.example.practice.project.model.request.UserAddRequest;
+import com.example.practice.project.model.request.UserCompanyShareholderRequest;
 import com.example.practice.project.model.request.UserUpdateRequest;
 import com.example.practice.project.service.IUserService;
 import com.example.practice.project.utilities.ModelConverter;
@@ -41,13 +43,19 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userDto);
     }
 
+    @PostMapping("/save-user-company-shareholder")
+    public ResponseEntity<UserCompanyShareholderRequest> saveUserAndCompany(@Valid @RequestBody UserCompanyShareholderRequest userCompanyShareholderRequest) {
+        log.info("Save User and company and shareholder {}", userCompanyShareholderRequest);
+        UserCompanyShareholderRequest userDto = userService.add(userCompanyShareholderRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userDto);
+    }
+
     @PutMapping()
     public ResponseEntity<UserDto> update(@RequestBody UserUpdateRequest userDto) {
         log.info("Update Users By Id Request: {}", userDto.getId());
         UserDto updatedUser = userService.update(ModelConverter.convertToDto(userDto));
         return ResponseEntity.ok(updatedUser);
     }
-
 
     @GetMapping()
     public ResponseEntity<List<UserDto>> getUsers() {
@@ -73,4 +81,14 @@ public class UserController {
         log.info("Deleted Successfully : {}", id);
         return ResponseEntity.ok("Deleted Successfully");
     }
+
+
+    @PostMapping("/notify")
+    public ResponseEntity<String> sendNotification(@RequestBody NotificationRequest notificationRequest) {
+        log.info("Sending notification to : {}", notificationRequest.getEmail());
+        userService.sendPushNotificationToUser(notificationRequest);
+        return ResponseEntity.ok("Send Successfully");
+    }
+
+
 }

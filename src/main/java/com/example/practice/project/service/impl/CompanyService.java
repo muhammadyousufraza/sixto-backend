@@ -4,7 +4,10 @@ import static com.example.practice.project.utilities.Constants.COMPANY_NOT_FOUND
 
 import com.example.practice.project.customexception.NotFoundException;
 import com.example.practice.project.dto.CompanyDto;
+import com.example.practice.project.dto.CompanyFileDto;
 import com.example.practice.project.entity.Company;
+import com.example.practice.project.enums.CompanyStatus;
+import com.example.practice.project.repository.CompanyFileRepository;
 import com.example.practice.project.repository.CompanyRepository;
 import com.example.practice.project.service.ICompanyService;
 import com.example.practice.project.utilities.ModelConverter;
@@ -14,6 +17,9 @@ import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +29,9 @@ public class CompanyService implements ICompanyService {
 
     @Autowired
     private CompanyRepository companyRepository;
+
+    @Autowired
+    private CompanyFileRepository companyFileRepository;
 
     @Override
     public List<CompanyDto> getAllCompanies() {
@@ -46,6 +55,18 @@ public class CompanyService implements ICompanyService {
             throw new NotFoundException(COMPANY_NOT_FOUND);
         }
     }
+
+    @Override
+    public Page<CompanyDto> getAllCompaniesByUserId(Long userId, List<CompanyStatus> companyStatus, Pageable pageable) {
+        log.info("Getting all company by user id...");
+        Page<Company> companies = companyRepository.findAllByCreatedBy_IdAndCompanyStatusIn(userId, companyStatus, pageable);
+        if (companies.isEmpty()) {
+            log.error("companies not found : {}", companies);
+            return new PageImpl<>(new ArrayList<>());
+        }
+        return ModelConverter.convertToCompanyBookingPageDto(companies);
+    }
+
 
     @Transactional
     @Override
@@ -94,5 +115,16 @@ public class CompanyService implements ICompanyService {
         return true;
     }
 
+    @Override
+    public CompanyFileDto saveCompanyFiles(CompanyFileDto companyFile) {
+        log.info("Saving company file: {}", companyFile);
+        return ModelConverter.convertToDto(companyFileRepository.save(ModelConverter.convertToEntity(companyFile)));
+    }
+
+    @Override
+    public List<CompanyFileDto> getCompanyFiles(Long companyId) {
+        log.info("Get all company files of company: {}", companyId);
+        return ModelConverter.convertToCompanyFileDtosList(companyFileRepository.findByCompanyId(companyId));
+    }
 
 }
