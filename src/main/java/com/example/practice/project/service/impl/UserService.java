@@ -70,7 +70,6 @@ public class UserService implements IUserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             UserDto userDto = ModelConverter.convertToDto(user);
-            userDto.setPassword(null);
             return userDto;
         }
         log.error("User not found with parameter: {}", username);
