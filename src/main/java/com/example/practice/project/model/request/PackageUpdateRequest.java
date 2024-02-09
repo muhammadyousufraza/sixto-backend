@@ -1,5 +1,6 @@
 package com.example.practice.project.model.request;
 
+import com.example.practice.project.dto.CompanyTypeDto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
@@ -20,5 +21,6 @@ public class PackageUpdateRequest implements Serializable {
     private Double packageFee;
     private Double stateFee;
     private String packageDetail;
+    private CompanyTypeDto companyType;
 
 }
