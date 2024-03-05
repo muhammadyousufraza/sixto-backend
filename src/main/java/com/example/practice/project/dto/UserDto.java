@@ -1,6 +1,7 @@
 package com.example.practice.project.dto;
 
 import java.io.Serializable;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +22,6 @@ public class UserDto implements Serializable {
     private String surname;
     private String address;
     private String contactNumber;
+    private List<UserRoleDto> userRoles;
+
 }

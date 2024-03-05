@@ -54,7 +54,7 @@ public class CompanyController {
 
     @GetMapping()
     public ResponseEntity<List<CompanyDto>> getCompanies() {
-        log.debug("Get All Companies");
+        log.info("Get All Companies");
         List<CompanyDto> allCompanies = iCompanyService.getAllCompanies();
         if (allCompanies.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(allCompanies);
@@ -64,7 +64,7 @@ public class CompanyController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CompanyDto> get(@PathVariable Long id) {
-        log.debug("Get Company By Id Request: {}", id);
+        log.info("Get Company By Id Request: {}", id);
         CompanyDto companyDto = iCompanyService.getById(id);
         return ResponseEntity.ok(companyDto);
     }
@@ -72,7 +72,7 @@ public class CompanyController {
     @GetMapping("/by-user/{id}/{statuses}")
     public ResponseEntity<Page<CompanyDto>> getAllCompaniesByUserId(@PathVariable Long id, @PathVariable List<CompanyStatus> statuses,
                                                                     @PageableDefault(size = 10) Pageable pageable) {
-        log.debug("Get All Companies By User Id Request: {}", id);
+        log.info("Get All Companies By User Id Request: {}", id);
         Page<CompanyDto> companyDto = iCompanyService.getAllCompaniesByUserId(id, statuses, pageable);
         if (!companyDto.hasContent()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(companyDto);

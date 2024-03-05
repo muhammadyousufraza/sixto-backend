@@ -8,6 +8,7 @@ import com.example.practice.project.dto.CompanyDto;
 import com.example.practice.project.dto.ShareholderDto;
 import com.example.practice.project.dto.UserDto;
 import com.example.practice.project.entity.User;
+import com.example.practice.project.entity.UserRole;
 import com.example.practice.project.model.request.NotificationRequest;
 import com.example.practice.project.model.request.ShareholderAddRequest;
 import com.example.practice.project.model.request.UserCompanyShareholderRequest;
@@ -20,6 +21,7 @@ import com.example.practice.project.service.WebSocketService;
 import com.example.practice.project.utilities.ModelConverter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
@@ -105,6 +107,29 @@ public class UserService implements IUserService {
         user.setUsername(userDto.getEmail());
         user.setCreatedDate(LocalDateTime.now());
         user.setUpdatedDate(LocalDateTime.now());
+        user.setUserRoles(Arrays.asList(new UserRole(1L, null)));
+
+        user = userRepository.save(user);
+        userDto = ModelConverter.convertToDto(user);
+        userDto.setPassword(null);
+        return userDto;
+    }
+
+    @Override
+    public UserDto addAdmin(UserDto userDto) {
+        log.info("Adding a new admin..");
+        String checkDuplicate = checkDuplicateUser(userDto);
+        if (StringUtils.hasLength(checkDuplicate)) {
+            log.error("Duplicate User: {}", userDto);
+            throw new BusinessException(checkDuplicate);
+        }
+        User user = ModelConverter.convertToEntity(userDto);
+
+        user.setPassword(passwordEncoder.encode((userDto.getPassword())));
+        user.setUsername(userDto.getEmail());
+        user.setCreatedDate(LocalDateTime.now());
+        user.setUpdatedDate(LocalDateTime.now());
+        user.setUserRoles(Arrays.asList(new UserRole(2L, null)));
         user = userRepository.save(user);
         userDto = ModelConverter.convertToDto(user);
         userDto.setPassword(null);

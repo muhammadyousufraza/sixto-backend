@@ -15,6 +15,7 @@ import com.example.practice.project.entity.File;
 import com.example.practice.project.entity.Package;
 import com.example.practice.project.entity.Shareholder;
 import com.example.practice.project.entity.User;
+import com.example.practice.project.model.request.AdminAddRequest;
 import com.example.practice.project.model.request.CompanyAddRequest;
 import com.example.practice.project.model.request.CompanyUpdateRequest;
 import com.example.practice.project.model.request.PackageAddRequest;
@@ -41,6 +42,10 @@ public class ModelConverter {
 
     public static UserDto convertToDto(User user) {
         return modelMapper.map(user, UserDto.class);
+    }
+
+    public static UserDto convertToDto(AdminAddRequest adminAddRequest) {
+        return modelMapper.map(adminAddRequest, UserDto.class);
     }
 
     public static ShareholderDto convertToDto(Shareholder shareholder) {

@@ -2,6 +2,9 @@ package com.example.practice.project.service.impl;
 
 
 import com.example.practice.project.dto.UserDto;
+import com.example.practice.project.entity.User;
+import com.example.practice.project.entity.UserRole;
+import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,8 +46,12 @@ public class UserDetailsImpl implements UserDetails {
      * @param user      user
      * @return UserDetailsImpl
      */
-    public static UserDetailsImpl build(UserDto user) {
+    public static UserDetailsImpl build(User user) {
+
         List<GrantedAuthority> authorities = new ArrayList<>();
+        for (UserRole role : user.getUserRoles()) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
 
         return new UserDetailsImpl(user.getPassword(), user.getId(), user.getUsername(), user.getEmail(), authorities);
     }

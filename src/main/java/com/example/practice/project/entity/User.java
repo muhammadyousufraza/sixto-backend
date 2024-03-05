@@ -1,10 +1,13 @@
 package com.example.practice.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,4 +40,8 @@ public class User extends BaseEntity {
     private String surname;
     private String address;
     private String contactNumber;
+
+    @ManyToMany()
+    @JsonIgnore
+    private List<UserRole> userRoles;
 }

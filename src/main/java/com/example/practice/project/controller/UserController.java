@@ -4,6 +4,7 @@ import static com.example.practice.project.utilities.Constants.API;
 import static com.example.practice.project.utilities.Constants.USER;
 
 import com.example.practice.project.dto.UserDto;
+import com.example.practice.project.model.request.AdminAddRequest;
 import com.example.practice.project.model.request.NotificationRequest;
 import com.example.practice.project.model.request.UserAddRequest;
 import com.example.practice.project.model.request.UserCompanyShareholderRequest;
@@ -40,6 +41,13 @@ public class UserController {
     public ResponseEntity<UserDto> save(@Valid @RequestBody UserAddRequest userAddRequest) {
         log.info(" Users Signup Request: {}", userAddRequest.getEmail());
         UserDto userDto = userService.add(ModelConverter.convertToDto(userAddRequest), true);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userDto);
+    }
+
+    @PostMapping("/admin")
+    public ResponseEntity<UserDto> saveAdmin(@Valid @RequestBody AdminAddRequest adminAddRequest) {
+        log.info(" Admin Signup Request: {}", adminAddRequest.getEmail());
+        UserDto userDto = userService.addAdmin(ModelConverter.convertToDto(adminAddRequest));
         return ResponseEntity.status(HttpStatus.CREATED).body(userDto);
     }
 

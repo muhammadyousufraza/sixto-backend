@@ -16,6 +16,8 @@ public interface IUserService {
 
     UserDto add(UserDto userDto, boolean isSendNotification);
 
+    UserDto addAdmin(UserDto userDto);
+
     UserCompanyShareholderRequest add(UserCompanyShareholderRequest userCompanyShareholderRequest);
 
     UserDto update(UserDto userDto);
