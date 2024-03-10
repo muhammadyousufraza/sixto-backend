@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResetPasswordRequest implements Serializable {
 
-    private String realm;
     private String email;
     private String newPassword;
-    private Boolean isFirstTimeLogin;
 }

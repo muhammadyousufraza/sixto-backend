@@ -3,6 +3,7 @@ package com.example.practice.project.config;
 import static com.example.practice.project.utilities.Constants.APACKAGE;
 import static com.example.practice.project.utilities.Constants.API;
 import static com.example.practice.project.utilities.Constants.AUTH;
+import static com.example.practice.project.utilities.Constants.CHANGE_PASSWORD;
 import static com.example.practice.project.utilities.Constants.COMPANY;
 import static com.example.practice.project.utilities.Constants.FILE;
 import static com.example.practice.project.utilities.Constants.LOGIN;
@@ -55,6 +56,7 @@ public class CustomWebSecurityConfigurer {
             //.antMatchers(HttpMethod.POST, API + AUTH + LOGIN).permitAll()
             //.antMatchers("/users").hasAnyAuthority("USER", "ADMIN")
             .antMatchers(HttpMethod.GET, "/version").permitAll()
+            .antMatchers(HttpMethod.POST, API + AUTH +CHANGE_PASSWORD ).permitAll()
             .antMatchers(HttpMethod.GET, API + USER + "/**").permitAll()
             //.antMatchers(HttpMethod.GET, API + USER + "/**").hasAnyAuthority("USER", "ADMIN")
             .antMatchers(HttpMethod.POST, API + USER + "/**").permitAll()

@@ -18,6 +18,8 @@ public interface IUserService {
 
     UserDto addAdmin(UserDto userDto);
 
+    UserDto updateAdmin(UserDto userDto);
+
     UserCompanyShareholderRequest add(UserCompanyShareholderRequest userCompanyShareholderRequest);
 
     UserDto update(UserDto userDto);

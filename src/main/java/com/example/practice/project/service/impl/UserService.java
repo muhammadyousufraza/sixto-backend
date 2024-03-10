@@ -137,6 +137,32 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
+    public UserDto updateAdmin(UserDto userDto) {
+        log.info("Updating a new admin..");
+        Optional<User> exitUser = userRepository.findById(userDto.getId());
+        if (!exitUser.isPresent()) {
+            log.error(USER_NOT_FOUND + " with parameter : {}", userDto.getId());
+            throw new NotFoundException(USER_NOT_FOUND);
+        }
+
+        User updatedUser = exitUser.get();
+
+
+
+
+        updatedUser.setUpdatedDate(LocalDateTime.now());
+        updatedUser.setEmail(userDto.getEmail());
+        updatedUser.setUsername(userDto.getUsername());
+
+
+        updatedUser = userRepository.save(updatedUser);
+        userDto = ModelConverter.convertToDto(updatedUser);
+        userDto.setPassword(null);
+        return userDto;
+    }
+
+    @Override
     public UserCompanyShareholderRequest add(UserCompanyShareholderRequest userCompanyShareholderRequest) {
         UserDto userDto = add(ModelConverter.convertToDto(userCompanyShareholderRequest.getUser()), false);
         log.info("User added successfully. User ID: {}", userDto.getId());
