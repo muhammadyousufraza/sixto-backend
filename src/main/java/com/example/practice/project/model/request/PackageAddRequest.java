@@ -37,4 +37,6 @@ public class PackageAddRequest implements Serializable {
     @NotNull(message = "Company Type empty")
     private CompanyTypeDto companyType;
 
+    private String type;
+
 }

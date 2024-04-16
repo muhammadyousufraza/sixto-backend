@@ -12,4 +12,6 @@ public interface CompanyRepository extends CustomRepository<Company, Long> {
 
     Page<Company> findAllByCreatedBy_IdAndCompanyStatusIn(Long userId, List<CompanyStatus> companyStatus, Pageable pageable);
 
+    Page<Company> findAllByCreatedBy_Id(Long userId, Pageable pageable);
+
 }

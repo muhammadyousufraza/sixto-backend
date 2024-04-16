@@ -59,8 +59,14 @@ public class CompanyService implements ICompanyService {
     @Override
     public Page<CompanyDto> getAllCompaniesByUserId(Long userId, List<CompanyStatus> companyStatus, Pageable pageable) {
         log.info("Getting all company by user id...");
-        Page<Company> companies = companyRepository.findAllByCreatedBy_IdAndCompanyStatusIn(userId, companyStatus, pageable);
-        if (companies.isEmpty()) {
+
+        Page<Company> companies = null;
+        if (null == companyStatus || companyStatus.isEmpty()) {
+            companies = companyRepository.findAllByCreatedBy_Id(userId, pageable);
+        } else {
+            companies = companyRepository.findAllByCreatedBy_IdAndCompanyStatusIn(userId, companyStatus, pageable);
+        }
+        if (null == companies || companies.isEmpty()) {
             log.error("companies not found : {}", companies);
             return new PageImpl<>(new ArrayList<>());
         }

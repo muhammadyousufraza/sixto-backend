@@ -42,4 +42,5 @@ public class Package extends BaseEntity {
     @JoinColumn(name = "company_type_id", referencedColumnName = "id", nullable = false)
     private CompanyType companyType;
 
+    private String type;
 }

@@ -70,10 +70,21 @@ public class CompanyController {
     }
 
     @GetMapping("/by-user/{id}/{statuses}")
-    public ResponseEntity<Page<CompanyDto>> getAllCompaniesByUserId(@PathVariable Long id, @PathVariable List<CompanyStatus> statuses,
+    public ResponseEntity<Page<CompanyDto>> getAllCompaniesByUserIdAndStatus(@PathVariable Long id, @PathVariable(required = false) List<CompanyStatus> statuses,
+                                                                    @PageableDefault(size = 10) Pageable pageable) {
+        log.info("Get All Companies By User Id and Status Request: {}", id);
+        Page<CompanyDto> companyDto = iCompanyService.getAllCompaniesByUserId(id, statuses, pageable);
+        if (!companyDto.hasContent()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(companyDto);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(companyDto);
+    }
+
+    @GetMapping("/by-user/{id}")
+    public ResponseEntity<Page<CompanyDto>> getAllCompaniesByUserId(@PathVariable Long id,
                                                                     @PageableDefault(size = 10) Pageable pageable) {
         log.info("Get All Companies By User Id Request: {}", id);
-        Page<CompanyDto> companyDto = iCompanyService.getAllCompaniesByUserId(id, statuses, pageable);
+        Page<CompanyDto> companyDto = iCompanyService.getAllCompaniesByUserId(id, null, pageable);
         if (!companyDto.hasContent()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(companyDto);
         }

@@ -22,5 +22,6 @@ public class PackageUpdateRequest implements Serializable {
     private Double stateFee;
     private String packageDetail;
     private CompanyTypeDto companyType;
+    private String type;
 
 }
