@@ -5,11 +5,16 @@ import static com.example.practice.project.utilities.Constants.COMPANY_NOT_FOUND
 import com.example.practice.project.customexception.NotFoundException;
 import com.example.practice.project.dto.CompanyDto;
 import com.example.practice.project.dto.CompanyFileDto;
+import com.example.practice.project.dto.ShareholderDto;
 import com.example.practice.project.entity.Company;
 import com.example.practice.project.enums.CompanyStatus;
+import com.example.practice.project.model.request.CompanyShareholderRequest;
+import com.example.practice.project.model.request.ShareholderAddRequest;
 import com.example.practice.project.repository.CompanyFileRepository;
 import com.example.practice.project.repository.CompanyRepository;
 import com.example.practice.project.service.ICompanyService;
+import com.example.practice.project.service.IPackageService;
+import com.example.practice.project.service.IShareholderService;
 import com.example.practice.project.utilities.ModelConverter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,6 +37,12 @@ public class CompanyService implements ICompanyService {
 
     @Autowired
     private CompanyFileRepository companyFileRepository;
+
+    @Autowired
+    private IPackageService packageService;
+
+    @Autowired
+    private IShareholderService shareholderService;
 
     @Override
     public List<CompanyDto> getAllCompanies() {
@@ -86,6 +97,21 @@ public class CompanyService implements ICompanyService {
 
         companyDto = ModelConverter.convertToDto(company);
         return companyDto;
+    }
+
+    @Transactional
+    @Override
+    public CompanyShareholderRequest add(CompanyShareholderRequest userCompanyShareholderRequest) {
+        CompanyDto companyDto = ModelConverter.convertToDto(userCompanyShareholderRequest.getCompany());
+        companyDto.setCompanyType(packageService.getById(companyDto.getPackageId()).getCompanyType().getName());
+        companyDto = add(companyDto, false);
+        log.info("Company saved successfully. Company ID: {}", companyDto.getId());
+        for (ShareholderAddRequest shareholder : userCompanyShareholderRequest.getShareholder()) {
+            shareholder.setCompanyId(companyDto.getId());
+            ShareholderDto shareholderDto = shareholderService.add(ModelConverter.convertToDto(shareholder), false);
+            log.info("ShareHolder  saved successfully. ShareHolder ID: {}", shareholderDto.getId());
+        }
+        return CompanyShareholderRequest.builder().company(ModelConverter.convertToRequest(companyDto)).build();
     }
 
     @Override

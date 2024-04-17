@@ -6,6 +6,7 @@ import static com.example.practice.project.utilities.Constants.COMPANY;
 import com.example.practice.project.dto.CompanyDto;
 import com.example.practice.project.enums.CompanyStatus;
 import com.example.practice.project.model.request.CompanyAddRequest;
+import com.example.practice.project.model.request.CompanyShareholderRequest;
 import com.example.practice.project.model.request.CompanyUpdateRequest;
 import com.example.practice.project.service.ICompanyService;
 import com.example.practice.project.utilities.ModelConverter;
@@ -44,6 +45,13 @@ public class CompanyController {
         return ResponseEntity.status(HttpStatus.CREATED).body(companyDto);
     }
 
+    @PostMapping("/save-company-shareholder")
+    public ResponseEntity<CompanyShareholderRequest> saveUserAndCompany(@Valid @RequestBody CompanyShareholderRequest companyShareholderRequest) {
+        log.info("Save company and shareholder {}", companyShareholderRequest);
+        CompanyShareholderRequest userDto = iCompanyService.add(companyShareholderRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userDto);
+    }
+
     @PutMapping()
     public ResponseEntity<CompanyDto> update(@RequestBody CompanyUpdateRequest companyUpdateRequest) {
         log.info("Update Company By Id Request: {}", companyUpdateRequest.getId());
@@ -71,7 +79,7 @@ public class CompanyController {
 
     @GetMapping("/by-user/{id}/{statuses}")
     public ResponseEntity<Page<CompanyDto>> getAllCompaniesByUserIdAndStatus(@PathVariable Long id, @PathVariable(required = false) List<CompanyStatus> statuses,
-                                                                    @PageableDefault(size = 10) Pageable pageable) {
+                                                                             @PageableDefault(size = 10) Pageable pageable) {
         log.info("Get All Companies By User Id and Status Request: {}", id);
         Page<CompanyDto> companyDto = iCompanyService.getAllCompaniesByUserId(id, statuses, pageable);
         if (!companyDto.hasContent()) {

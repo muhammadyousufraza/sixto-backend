@@ -30,8 +30,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 public class ModelConverter {
 
@@ -48,6 +50,7 @@ public class ModelConverter {
     public static UserDto convertToDto(AdminAddRequest adminAddRequest) {
         return modelMapper.map(adminAddRequest, UserDto.class);
     }
+
     public static UserDto convertToDto(AdminUpdateRequest adminUpdateRequest) {
         return modelMapper.map(adminUpdateRequest, UserDto.class);
     }
@@ -61,7 +64,35 @@ public class ModelConverter {
     }
 
     public static CompanyDto convertToDto(Company company) {
-        return modelMapper.map(company, CompanyDto.class);
+        if (company == null) {
+            return null;
+        }
+
+        CompanyDto companyDto = new CompanyDto();
+
+        companyDto.setId(company.getId());
+
+        companyDto.setFirstName(company.getFirstName());
+        companyDto.setSecondName(company.getSecondName());
+        companyDto.setThirdName(company.getThirdName());
+        companyDto.setCompanyType(company.getCompanyType());
+        companyDto.setStreetAddress(company.getStreetAddress());
+        companyDto.setDetailAddress(company.getDetailAddress());
+        companyDto.setCity(company.getCity());
+        companyDto.setState(company.getState());
+        companyDto.setCode(company.getCode());
+
+        companyDto.setCompanyStatus(company.getCompanyStatus());
+
+        if (company.getAPackage() != null) {
+            companyDto.setPackageId(company.getAPackage().getId());
+        }
+
+        if (company.getCreatedBy() != null) {
+            companyDto.setCreatedBy(company.getCreatedBy().getId());
+        }
+
+        return companyDto;
     }
 
     public static UserDto convertToDto(UserAddRequest userAddRequest) {
@@ -77,7 +108,24 @@ public class ModelConverter {
     }
 
     public static CompanyDto convertToDto(CompanyAddRequest companyAddRequest) {
-        return modelMapper.map(companyAddRequest, CompanyDto.class);
+        if (companyAddRequest == null) {
+            return null;
+        }
+
+        CompanyDto companyDto = new CompanyDto();
+
+        companyDto.setFirstName(companyAddRequest.getFirstName());
+        companyDto.setSecondName(companyAddRequest.getSecondName());
+        companyDto.setThirdName(companyAddRequest.getThirdName());
+        companyDto.setStreetAddress(companyAddRequest.getStreetAddress());
+        companyDto.setDetailAddress(companyAddRequest.getDetailAddress());
+        companyDto.setCity(companyAddRequest.getCity());
+        companyDto.setState(companyAddRequest.getState());
+        companyDto.setCode(companyAddRequest.getCode());
+        companyDto.setPackageId(companyAddRequest.getPackageId());
+        companyDto.setCreatedBy(companyAddRequest.getCreatedBy());
+        companyDto.setCompanyType(companyAddRequest.getCompanyType());
+        return companyDto;
     }
 
     public static PackageDto convertToDto(PackageAddRequest packages) {
@@ -118,7 +166,10 @@ public class ModelConverter {
     }
 
     public static List<CompanyDto> convertToCompanyDtosList(List<Company> companies) {
-        return Arrays.asList(modelMapper.map(companies, CompanyDto[].class));
+        return companies.stream()
+            .map(ModelConverter::convertToDto)  // Assuming convertToDto is a static method in CompanyMapper
+            .collect(Collectors.toList());
+        //return Arrays.asList(modelMapper.map(companies, CompanyDto[].class));
     }
 
     public static List<ShareholderDto> convertToShareholderDtosList(List<Shareholder> shareholders) {
@@ -138,7 +189,13 @@ public class ModelConverter {
     }
 
     public static Page<CompanyDto> convertToCompanyBookingPageDto(Page<Company> companies) {
-        return companies.map(x -> modelMapper.map(x, CompanyDto.class));
+        List<CompanyDto> companyDtoList = companies.getContent().stream()
+            .map(company -> convertToDto(company))
+            .collect(Collectors.toList());
+
+        return new PageImpl<>(companyDtoList, companies.getPageable(), companies.getTotalElements());
+
+        //return companies.map(x -> modelMapper.map(x, CompanyDto.class));
     }
 
     public static User convertToEntity(UserDto userDto) {
@@ -149,12 +206,73 @@ public class ModelConverter {
         return modelMapper.map(userDto, UserAddRequest.class);
     }
 
+    public static CompanyAddRequest convertToRequest(CompanyDto companyDto) {
+        return modelMapper.map(companyDto, CompanyAddRequest.class);
+    }
+
     public static Shareholder convertToEntity(ShareholderDto shareholderDto) {
-        return modelMapper.map(shareholderDto, Shareholder.class);
+        if (shareholderDto == null) {
+            return null;
+        }
+
+        Shareholder shareholder = new Shareholder();
+
+        shareholder.setId(null != shareholderDto.getId() ? shareholder.getId() : null);
+
+        shareholder.setFirstName(shareholderDto.getFirstName());
+        shareholder.setLastName(shareholderDto.getLastName());
+        shareholder.setNationality(shareholderDto.getNationality());
+        shareholder.setPassportNumber(shareholderDto.getPassportNumber());
+        shareholder.setOccupation(shareholderDto.getOccupation());
+        shareholder.setMaritalStatus(shareholderDto.getMaritalStatus());
+        shareholder.setHomeAddress(shareholderDto.getHomeAddress());
+        shareholder.setSharePercentage(shareholderDto.getSharePercentage());
+        shareholder.setShareHolder(shareholderDto.isShareHolder());
+        shareholder.setLegalRepresentative(shareholderDto.isLegalRepresentative());
+        shareholder.setManager(shareholderDto.isManager());
+
+        if (shareholderDto.getCompanyId() != null) {
+            Company company = new Company();
+            company.setId(shareholderDto.getCompanyId());
+            shareholder.setCompany(company);
+        }
+
+        return shareholder;
     }
 
     public static Company convertToEntity(CompanyDto companyDto) {
-        return modelMapper.map(companyDto, Company.class);
+
+        if (companyDto == null) {
+            return null;
+        }
+
+        Company company = new Company();
+
+        company.setId(null != companyDto.getId() ? companyDto.getId() : null);
+        company.setFirstName(companyDto.getFirstName());
+        company.setSecondName(companyDto.getSecondName());
+        company.setThirdName(companyDto.getThirdName());
+        company.setCompanyType(companyDto.getCompanyType());
+        company.setStreetAddress(companyDto.getStreetAddress());
+        company.setDetailAddress(companyDto.getDetailAddress());
+        company.setCity(companyDto.getCity());
+        company.setState(companyDto.getState());
+        company.setCode(companyDto.getCode());
+        company.setCompanyStatus(companyDto.getCompanyStatus());
+
+        if (companyDto.getPackageId() != null) {
+            Package aPackage = new Package();
+            aPackage.setId(companyDto.getPackageId());
+            company.setAPackage(aPackage);
+        }
+
+        if (companyDto.getCreatedBy() != null) {
+            User createdBy = new User();
+            createdBy.setId(companyDto.getCreatedBy());
+            company.setCreatedBy(createdBy);
+        }
+
+        return company;
     }
 
     public static Package convertToEntity(PackageDto packageDto) {
