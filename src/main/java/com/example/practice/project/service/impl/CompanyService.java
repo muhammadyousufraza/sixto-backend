@@ -73,7 +73,7 @@ public class CompanyService implements ICompanyService {
 
         Page<Company> companies = null;
         if (null == companyStatus || companyStatus.isEmpty()) {
-            companies = companyRepository.findAllByCreatedBy_Id(userId, pageable);
+            companies = companyRepository.findPaidCompaniesByCreatedBy(userId, pageable);
         } else {
             companies = companyRepository.findAllByCreatedBy_IdAndCompanyStatusIn(userId, companyStatus, pageable);
         }

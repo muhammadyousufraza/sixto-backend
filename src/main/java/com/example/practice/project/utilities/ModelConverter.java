@@ -6,6 +6,7 @@ import com.example.practice.project.dto.CompanyFileDto;
 import com.example.practice.project.dto.CompanyTypeDto;
 import com.example.practice.project.dto.FileDto;
 import com.example.practice.project.dto.PackageDto;
+import com.example.practice.project.dto.PaymentDto;
 import com.example.practice.project.dto.ShareholderDto;
 import com.example.practice.project.dto.UserDto;
 import com.example.practice.project.entity.Company;
@@ -13,6 +14,7 @@ import com.example.practice.project.entity.CompanyFiles;
 import com.example.practice.project.entity.CompanyType;
 import com.example.practice.project.entity.File;
 import com.example.practice.project.entity.Package;
+import com.example.practice.project.entity.Payment;
 import com.example.practice.project.entity.Shareholder;
 import com.example.practice.project.entity.User;
 import com.example.practice.project.model.request.AdminAddRequest;
@@ -61,6 +63,10 @@ public class ModelConverter {
 
     public static PackageDto convertToDto(Package packages) {
         return modelMapper.map(packages, PackageDto.class);
+    }
+
+    public static PaymentDto convertToDto(Payment payment) {
+        return modelMapper.map(payment, PaymentDto.class);
     }
 
     public static CompanyDto convertToDto(Company company) {
@@ -200,6 +206,10 @@ public class ModelConverter {
 
     public static User convertToEntity(UserDto userDto) {
         return modelMapper.map(userDto, User.class);
+    }
+
+    public static Payment convertToEntity(PaymentDto paymentDto) {
+        return modelMapper.map(paymentDto, Payment.class);
     }
 
     public static UserAddRequest convertToRequest(UserDto userDto) {

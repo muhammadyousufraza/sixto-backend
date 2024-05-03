@@ -13,7 +13,7 @@ public class BusinessException extends RuntimeException {
         super(message);
     }
 
-    public BusinessException(String message,Object customObject) {
+    public BusinessException(String message, Object customObject) {
         super(message);
         this.customObject = customObject;
     }

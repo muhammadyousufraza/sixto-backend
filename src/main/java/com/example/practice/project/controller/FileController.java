@@ -7,7 +7,6 @@ import static com.example.practice.project.utilities.Constants.UPLOAD_MULTI_FILE
 
 import com.example.practice.project.dto.CompanyFileDto;
 import com.example.practice.project.dto.FileDto;
-import com.example.practice.project.entity.CompanyFiles;
 import com.example.practice.project.model.request.MultipleFileRequest;
 import com.example.practice.project.service.ICompanyService;
 import com.example.practice.project.service.IFileService;

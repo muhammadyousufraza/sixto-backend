@@ -11,6 +11,7 @@ public class Constants {
     public static final String AUTH = "/auth";
     public static final String APACKAGE = "/package";
     public static final String COMPANY = "/company";
+    public static final String PAYMENT = "/payment";
     public static final String FILE = "/file";
     public static final String SHAREHOLDER = "/shareholder";
     public static final String USER = "/user";
@@ -21,6 +22,7 @@ public class Constants {
     public static final String CHANGE_PASSWORD = "/change-password";
     public static final String USER_NOT_FOUND = "User not found";
     public static final String PACKAGE_NOT_FOUND = "package not found";
+    public static final String PAYMENT_NOT_FOUND = "payment not found";
 
     public static final String COMPANY_NOT_FOUND = "company not found";
 

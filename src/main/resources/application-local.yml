@@ -1,11 +1,11 @@
 server:
-  port: 8120
+  port: 8080
 
 spring:
   datasource:
     username: root
-    url: jdbc:mysql://localhost:3306/practiceproject?createDatabaseIfNotExist=true
-    password:
+    url: jdbc:mysql://localhost:3306/practiceprojectextra?createDatabaseIfNotExist=true
+    password: nisum123
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -15,27 +15,10 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
-    show-sql:true:
+    show-sql: true
     generate-ddl: true
     open-in-view: true
-    show-sql: false
-
-  sleuth:
-    enabled: true
 
   sql:
     init:
       mode: always
-
-  # Redis Config
-  cache:
-    type: redis
-    redis:
-      host: localhost
-      port: 6379
-
-  thymeleaf:
-    mode: HTML
-
-url:
-  base-uri: localhost

@@ -8,6 +8,7 @@ import static com.example.practice.project.utilities.Constants.COMPANY;
 import static com.example.practice.project.utilities.Constants.FILE;
 import static com.example.practice.project.utilities.Constants.LOGIN;
 import static com.example.practice.project.utilities.Constants.LOOKUP;
+import static com.example.practice.project.utilities.Constants.PAYMENT;
 import static com.example.practice.project.utilities.Constants.USER;
 
 import com.example.practice.project.jwt.AuthEntryPointJwt;
@@ -56,7 +57,7 @@ public class CustomWebSecurityConfigurer {
             //.antMatchers(HttpMethod.POST, API + AUTH + LOGIN).permitAll()
             //.antMatchers("/users").hasAnyAuthority("USER", "ADMIN")
             .antMatchers(HttpMethod.GET, "/version").permitAll()
-            .antMatchers(HttpMethod.POST, API + AUTH +CHANGE_PASSWORD ).permitAll()
+            .antMatchers(HttpMethod.POST, API + AUTH + CHANGE_PASSWORD).permitAll()
             .antMatchers(HttpMethod.GET, API + USER + "/**").permitAll()
             //.antMatchers(HttpMethod.GET, API + USER + "/**").hasAnyAuthority("USER", "ADMIN")
             .antMatchers(HttpMethod.POST, API + USER + "/**").permitAll()
@@ -70,6 +71,9 @@ public class CustomWebSecurityConfigurer {
             .antMatchers(HttpMethod.POST, API + COMPANY + "/**").permitAll()
             .antMatchers(HttpMethod.PUT, API + COMPANY + "/**").permitAll()
             .antMatchers(HttpMethod.DELETE, API + COMPANY + "/**").permitAll()
+            .antMatchers(HttpMethod.GET, API + PAYMENT + "/**").permitAll()
+            .antMatchers(HttpMethod.POST, API + PAYMENT + "/**").permitAll()
+            .antMatchers(HttpMethod.PUT, API + PAYMENT + "/**").permitAll()
             .antMatchers(HttpMethod.GET, API + LOOKUP + "/**").permitAll()
             .antMatchers(HttpMethod.DELETE, API + COMPANY + "/**").permitAll()
             .antMatchers(HttpMethod.POST, API + FILE + "/**").permitAll()

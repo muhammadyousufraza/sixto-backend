@@ -22,7 +22,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,7 +67,7 @@ public class AuthController {
         String userEmail = authentication.getName();
         UserDto userDto = userService.getUserByEmail(userEmail);
 
-        return ResponseEntity.ok(new JwtResponse("Token Generated", jwt, true,userDto.getId(), userEmail));
+        return ResponseEntity.ok(new JwtResponse("Token Generated", jwt, true, userDto.getId(), userEmail));
     }
 
     @PostMapping(CHANGE_PASSWORD)
