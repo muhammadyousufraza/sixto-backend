@@ -60,7 +60,9 @@ public class CompanyService implements ICompanyService {
         log.info("Getting company by id: {}", id);
         Optional<Company> companyOptional = companyRepository.findById(id);
         if (companyOptional.isPresent()) {
-            return ModelConverter.convertToDto(companyOptional.get());
+            CompanyDto companyDto = ModelConverter.convertToDto(companyOptional.get());
+            companyDto.setShareholderDtoList(shareholderService.getAllShareholdersByCompanyId(companyDto.getId()));
+            return companyDto;
         } else {
             log.error(COMPANY_NOT_FOUND + " with parameter : {}", id);
             throw new NotFoundException(COMPANY_NOT_FOUND);

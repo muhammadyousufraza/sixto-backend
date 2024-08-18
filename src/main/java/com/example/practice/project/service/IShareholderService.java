@@ -7,6 +7,7 @@ public interface IShareholderService {
 
     List<ShareholderDto> getAllShareholders();
 
+    List<ShareholderDto> getAllShareholdersByCompanyId(Long companyId);
 
     ShareholderDto getById(Long id);
 

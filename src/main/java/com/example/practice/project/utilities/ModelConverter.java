@@ -167,6 +167,10 @@ public class ModelConverter {
         return Arrays.asList(modelMapper.map(users, UserDto[].class));
     }
 
+    public static List<ShareholderDto> convertToList(List<Shareholder> shareholders) {
+        return Arrays.asList(modelMapper.map(shareholders, ShareholderDto[].class));
+    }
+
     public static List<PackageDto> convertToPackageDtosList(List<Package> packages) {
         return Arrays.asList(modelMapper.map(packages, PackageDto[].class));
     }

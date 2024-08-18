@@ -36,6 +36,12 @@ public class ShareholderService implements IShareholderService {
     }
 
     @Override
+    public List<ShareholderDto> getAllShareholdersByCompanyId(Long companyId) {
+        log.info("Getting all shareholders by company id: {}", companyId);
+        return ModelConverter.convertToList(shareholderRepository.findByCompany(companyId));
+    }
+
+    @Override
     public ShareholderDto getById(Long id) {
         log.info("Getting shareholder by id: {}", id);
         Optional<Shareholder> shareholderOptional = shareholderRepository.findById(id);
